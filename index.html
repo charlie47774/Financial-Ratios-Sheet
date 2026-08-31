@@ -1,0 +1,320 @@
+<title>Financial Ratios Cheat Sheet</title>
+<style>
+  :root{
+    --bg:#f6f4ee;
+    --surface:#ffffff;
+    --surface-edge:#e4ddcf;
+    --ink:#1f2a24;
+    --muted:#5c6b63;
+    --accent:#1e5c4a;
+    --accent-soft:#e4efe9;
+    --high:#1e5c4a;
+    --high-soft:#e4efe9;
+    --low:#9c4530;
+    --low-soft:#f6e8e2;
+    --rule:#d9d2c2;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#141915;
+      --surface:#1b221c;
+      --surface-edge:#2c352d;
+      --ink:#eef1ec;
+      --muted:#9fac a2;
+      --muted:#9caea2;
+      --accent:#6fceac;
+      --accent-soft:#20362c;
+      --high:#7fd9b6;
+      --high-soft:#1e3b2e;
+      --low:#e6a08a;
+      --low-soft:#3a2620;
+      --rule:#333d34;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#141915;
+    --surface:#1b221c;
+    --surface-edge:#2c352d;
+    --ink:#eef1ec;
+    --muted:#9caea2;
+    --accent:#6fceac;
+    --accent-soft:#20362c;
+    --high:#7fd9b6;
+    --high-soft:#1e3b2e;
+    --low:#e6a08a;
+    --low-soft:#3a2620;
+    --rule:#333d34;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"IBM Plex Sans", -apple-system, "Segoe UI", sans-serif;
+    padding:2.5rem 1.25rem 4rem;
+    line-height:1.5;
+  }
+  .page{
+    max-width:860px;
+    margin:0 auto;
+  }
+  header{
+    margin-bottom:2.25rem;
+    border-bottom:2px solid var(--ink);
+    padding-bottom:1.1rem;
+  }
+  .eyebrow{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:0.72rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 0.5rem;
+  }
+  h1{
+    font-family:"Source Serif 4", Georgia, serif;
+    font-weight:600;
+    font-size:2.1rem;
+    margin:0 0 0.4rem;
+    text-wrap:balance;
+  }
+  .sub{
+    color:var(--muted);
+    font-size:0.95rem;
+    margin:0;
+  }
+
+  .basics{
+    background:var(--surface);
+    border:1px solid var(--surface-edge);
+    border-radius:10px;
+    padding:1.25rem 1.4rem;
+    margin-bottom:2.25rem;
+  }
+  .basics h2{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:0.78rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin:0 0 0.9rem;
+  }
+  .basics-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:0.55rem 1.5rem;
+  }
+  @media (max-width:560px){ .basics-grid{grid-template-columns:1fr;} }
+  .basics-grid dt{
+    font-weight:600;
+    font-size:0.88rem;
+  }
+  .basics-grid dd{
+    margin:0.1rem 0 0.6rem;
+    font-family:"IBM Plex Mono", monospace;
+    font-size:0.86rem;
+    color:var(--muted);
+  }
+
+  .section-title{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin:2.4rem 0 0.9rem;
+    display:flex;
+    align-items:center;
+    gap:0.75rem;
+  }
+  .section-title::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--rule);
+  }
+
+  .card{
+    background:var(--surface);
+    border:1px solid var(--surface-edge);
+    border-radius:12px;
+    padding:1.4rem 1.5rem 1.5rem;
+    margin-bottom:1.1rem;
+  }
+  .card h3{
+    font-family:"Source Serif 4", Georgia, serif;
+    font-size:1.25rem;
+    font-weight:600;
+    margin:0 0 0.9rem;
+  }
+
+  .formula{
+    display:inline-flex;
+    flex-direction:column;
+    align-items:center;
+    font-family:"IBM Plex Mono", monospace;
+    font-size:0.95rem;
+    margin:0 0 1.1rem;
+    background:var(--accent-soft);
+    padding:0.7rem 1.2rem;
+    border-radius:8px;
+  }
+  .formula .num{
+    padding-bottom:0.25rem;
+    border-bottom:1.5px solid var(--ink);
+  }
+  .formula .den{
+    padding-top:0.25rem;
+  }
+  .formula .times{
+    margin-left:0.5rem;
+    align-self:center;
+  }
+  .formula-row{
+    display:flex;
+    align-items:center;
+  }
+
+  .verdicts{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0.9rem;
+  }
+  @media (max-width:560px){ .verdicts{grid-template-columns:1fr;} }
+  .verdict{
+    border-radius:8px;
+    padding:0.85rem 1rem;
+    font-size:0.9rem;
+  }
+  .verdict.high{ background:var(--high-soft); }
+  .verdict.low{ background:var(--low-soft); }
+  .verdict .tag{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:0.72rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    font-weight:600;
+    display:block;
+    margin-bottom:0.35rem;
+  }
+  .verdict.high .tag{ color:var(--high); }
+  .verdict.low .tag{ color:var(--low); }
+
+  .note{
+    margin-top:0.9rem;
+    font-size:0.82rem;
+    color:var(--muted);
+    border-left:2px solid var(--rule);
+    padding-left:0.7rem;
+  }
+
+  footer{
+    margin-top:2.5rem;
+    padding-top:1rem;
+    border-top:1px solid var(--rule);
+    font-size:0.8rem;
+    color:var(--muted);
+    font-family:"IBM Plex Mono", monospace;
+  }
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<div class="page">
+  <header>
+    <p class="eyebrow">Exam Revision · Ratio Analysis</p>
+    <h1>Financial Ratios Cheat Sheet</h1>
+    <p class="sub">Formulas, what they measure, and what a high or low result tells you.</p>
+  </header>
+
+  <div class="basics">
+    <h2>Building Blocks</h2>
+    <dl class="basics-grid">
+      <dt>Gross Profit</dt>
+      <dd>Total Revenue − Cost of Goods Sold</dd>
+      <dt>Gross Sales</dt>
+      <dd>All sales, before any deductions</dd>
+      <dt>Net Sales (Revenue)</dt>
+      <dd>Gross Sales − (Allowances + Discounts + Returns)</dd>
+      <dt>Average (Balance)</dt>
+      <dd>(Starting + Ending) ÷ 2</dd>
+    </dl>
+  </div>
+
+  <p class="section-title">Profitability</p>
+
+  <div class="card">
+    <h3>Gross Profit Ratio</h3>
+    <div class="formula-row">
+      <div class="formula"><span class="num">Gross Profit</span><span class="den">Net Sales</span></div>
+      <span class="times">× 100</span>
+    </div>
+    <div class="verdicts">
+      <div class="verdict high"><span class="tag">High</span>Strong markup / pricing power over what it costs to make or buy the goods sold. Good cost control on production or purchasing.</div>
+      <div class="verdict low"><span class="tag">Low</span>Thin margin between selling price and cost of goods — heavy discounting, rising input costs, or weak pricing control.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Net Profit Ratio</h3>
+    <div class="formula-row">
+      <div class="formula"><span class="num">Net Profit</span><span class="den">Total Revenue</span></div>
+      <span class="times">× 100</span>
+    </div>
+    <div class="verdicts">
+      <div class="verdict high"><span class="tag">High</span>Business keeps a large share of revenue as profit after ALL expenses (operating, interest, tax) — efficient overall cost control.</div>
+      <div class="verdict low"><span class="tag">Low</span>Operating expenses, interest or overheads are eating into profit even if gross profit looks fine — a sign to check expense lines below gross profit.</div>
+    </div>
+    <p class="note">Compare Gross Profit Ratio and Net Profit Ratio together: a high gross margin but low net margin points to bloated operating expenses, not a pricing problem.</p>
+  </div>
+
+  <div class="card">
+    <h3>Return on Owners Equity</h3>
+    <div class="formula-row">
+      <div class="formula"><span class="num">Net Profit</span><span class="den">Average Equity Balance</span></div>
+      <span class="times">× 100</span>
+    </div>
+    <div class="verdicts">
+      <div class="verdict high"><span class="tag">High</span>Owners are earning a strong return on the capital they've invested — efficient use of equity, attractive to investors.</div>
+      <div class="verdict low"><span class="tag">Low</span>Owners' funds are tied up but not generating much return — capital could arguably be working harder elsewhere.</div>
+    </div>
+    <p class="note">Your source sheet says "Net Revenue" over Average Equity Balance — the standard formula uses <strong>Net Profit</strong> over Average Equity. Worth double-checking against your course notes before the exam.</p>
+  </div>
+
+  <p class="section-title">Efficiency &amp; Turnover</p>
+
+  <div class="card">
+    <h3>Rate of Turnover of Inventories</h3>
+    <div class="formula-row">
+      <div class="formula"><span class="num">Cost of Goods Sold</span><span class="den">Average Inventory</span></div>
+    </div>
+    <div class="verdicts">
+      <div class="verdict high"><span class="tag">High</span>Stock is sold and replaced quickly — strong sales or lean stock-holding. Extremely high can mean stock levels are too low, risking stockouts.</div>
+      <div class="verdict low"><span class="tag">Low</span>Weak demand, poor forecasting, or overstocking — cash is tied up sitting in inventory rather than being put to use.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Rate of Turnover of Accounts Receivable</h3>
+    <div class="formula-row">
+      <div class="formula"><span class="num">Net Credit Sales</span><span class="den">Average Accounts Receivable</span></div>
+    </div>
+    <div class="verdicts">
+      <div class="verdict high"><span class="tag">High</span>Debtors are being converted to cash quickly — effective credit control and collection processes.</div>
+      <div class="verdict low"><span class="tag">Low</span>Customers are slow to pay — cash flow is squeezed and there's greater risk of bad debts. May signal credit terms are too generous.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Turnover in Days</h3>
+    <div class="formula-row">
+      <div class="formula"><span class="num">365</span><span class="den">Turnover Ratio</span></div>
+    </div>
+    <div class="verdicts">
+      <div class="verdict high"><span class="tag">High (more days)</span>Takes longer to sell inventory or collect debts — slower cycle, more cash tied up for longer.</div>
+      <div class="verdict low"><span class="tag">Low (fewer days)</span>Inventory sells or debtors pay faster — quicker cash cycle, generally the healthier sign.</div>
+    </div>
+    <p class="note">Note this one flips direction versus the ratios above it: for turnover <em>ratios</em>, high is usually good; for turnover in <em>days</em>, low is usually good, since it's measuring time taken rather than speed of activity.</p>
+  </div>
+
+  <footer>Charlie's revision sheet · compiled from lecture notes</footer>
+</div>
